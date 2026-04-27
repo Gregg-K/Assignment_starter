@@ -38,6 +38,17 @@ def create_student():
 def fetch_students():
     return jsonify( [student.to_dict() for student in students] )
 
+#update student
+@app.route("/student/<int:id>", methods=["PUT"])
+def update_student(id):
+    data = request.json
+    for student in students:
+        if student.id == id:
+            student.name = data.get("name", student.name)
+            student.course = data.get("course", student.course)
+            return jsonify(student.to_dict())
+    return jsonify({"error": "student not found"}) 404
+
 
 # dynamic routes
 # UPDATE, DELETE, GET individual learner
