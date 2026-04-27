@@ -38,6 +38,14 @@ def create_student():
 def fetch_students():
     return jsonify( [student.to_dict() for student in students] )
 
+#get single student by ID
+@app.route("/student/<int:id>", methods=["GET"])
+def get_student(id):
+    for student in students:
+        if student.id == id:
+            return jsonify(student.to_dict())
+    return jsonify({"error":"student not found"}), 404 
+
 #update student
 @app.route("/student/<int:id>", methods=["PUT"])
 def update_student(id):
@@ -55,7 +63,7 @@ def update_student(id):
 def delete_student(id):
     for student in students:
         if student.id == id:
-            students.remove(students)
+            students.remove(student)
             return jsonify({"message": "student deleted"})
     return jsonify({"error": "student not found"}), 404
 
