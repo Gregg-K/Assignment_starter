@@ -47,7 +47,18 @@ def update_student(id):
             student.name = data.get("name", student.name)
             student.course = data.get("course", student.course)
             return jsonify(student.to_dict())
-    return jsonify({"error": "student not found"}) 404
+    return jsonify({"error": "student not found"}), 404
+
+
+#delete student
+@app.route("/student/<int:id>", methods=["DELETE"])
+def delete_student(id):
+    for student in students:
+        if student.id == id:
+            students.remove(students)
+            return jsonify({"message": "student deleted"})
+    return jsonify({"error": "student not found"}), 404
+
 
 
 # dynamic routes
