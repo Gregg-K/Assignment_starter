@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+CORS(app)
 
 app = Flask(__name__)
 
@@ -19,7 +21,7 @@ class Student:   #mapped to database table
 # data holder
 students = [
      Student(1, "Akida Mwaura", "Software Development"),
-     Student(2, "Mike John", "SCyber Security")
+     Student(2, "Mike John", "Cyber Security")
 ]
 
 
